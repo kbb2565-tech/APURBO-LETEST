@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#060812">
+<title>Login — {{ site_name or 'ApurboCloud' }}</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" href="/favicon-64.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#060812;--bg2:#0d1020;--accent:#4f8eff;--accent2:#7c5bff;--green:#22d07a;--text:#e8eaf6;--muted:#6b7a99;--border:rgba(255,255,255,0.07)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.bg-glow{position:fixed;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(circle,rgba(79,142,255,0.08) 0%,transparent 70%);pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.logo{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#4f8eff,#7c5bff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;text-align:center}
+.tagline{color:var(--muted);font-size:.82rem;margin-bottom:32px;text-align:center}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px 24px;width:100%;max-width:380px;animation:fadeUp .6s cubic-bezier(.22,.8,.26,1) both}
+.card-title{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.card-sub{color:var(--muted);font-size:.82rem;margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.label{font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:6px;display:block;text-transform:uppercase;letter-spacing:.3px}
+.input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:.9rem;font-family:'Sora',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s}
+.input::placeholder{color:#4a5673}
+.input:focus{border-color:rgba(79,142,255,0.45);box-shadow:0 0 0 4px rgba(79,142,255,0.1)}
+.btn-submit{width:100%;background:linear-gradient(135deg,#4f8eff,#7c5bff);border:none;color:#fff;padding:14px;border-radius:12px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;margin-top:8px;transition:opacity .2s,transform .2s}
+.btn-submit:hover{opacity:.88}
+.btn-submit:active{transform:scale(.99)}
+.divider{text-align:center;color:var(--muted);font-size:.78rem;margin:20px 0;position:relative}
+.divider::before,.divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--border)}
+.divider::before{left:0}.divider::after{right:0}
+.link-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--text);padding:13px;border-radius:12px;font-size:.88rem;font-weight:600;font-family:'Sora',sans-serif;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:border-color .2s}
+.link-btn:hover{border-color:rgba(255,255,255,0.15)}
+.error{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:10px 14px;color:#f87171;font-size:.82rem;margin-bottom:16px}
+.back{text-align:center;margin-top:20px;font-size:.78rem;color:var(--muted)}
+.back a{color:var(--accent);text-decoration:none}
+.green-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;vertical-align:middle}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div><div class="bg-glow"></div>
+<div class="wrap">
+  <div class="logo">{{ site_name or 'ApurboCloud' }}</div>
+  <div class="tagline">Host your bots and apps</div>
+  <div class="card">
+    <div class="card-title">Welcome back</div>
+    <div class="card-sub"><span class="green-dot"></span>Sign in to your account</div>
+    {% if error %}<div class="error"><i class="fas fa-circle-exclamation"></i> {{ error }}</div>{% endif %}
+    <form method="POST" autocomplete="on">
+      <div class="form-group">
+        <label class="label" for="username">Username</label>
+        <input id="username" class="input" type="text" name="username" value="{{ username or '' }}" placeholder="Your username" required autofocus autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20">
+      </div>
+      <div class="form-group">
+        <label class="label" for="password">Password</label>
+        <input id="password" class="input" type="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+    </form>
+    <div class="divider">or</div>
+    <a href="/register" class="link-btn"><i class="fas fa-user-plus"></i> Create new account</a>
+  </div>
+  <div class="back"><a href="/"><i class="fas fa-arrow-left"></i> Back to home</a></div>
+</div>
+</body>
+</html>

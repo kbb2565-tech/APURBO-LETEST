@@ -1,0 +1,12 @@
+{
+  "servers": {},
+  "users": {},
+  "settings": {
+    "maintenance": false,
+    "maintenance_msg": "System under maintenance.",
+    "theme_color": "#4f8eff",
+    "normal_password": "APURBODEV987",
+    "site_name": "ApurboCloud",
+    "auto_restart_interval": 300
+  }
+}

@@ -1,0 +1,10 @@
+<div class="apd-tabs">
+  <a href="/admin" class="{{ 'on' if active == 'admin' else '' }}">ADMIN LOGIN</a>
+  <a href="/login" class="{{ 'on' if active == 'user' else '' }}">USER LOGIN</a>
+  <a href="/register" class="{{ 'on' if active == 'register' else '' }}">CREATE ACCOUNT</a>
+</div>
+<style>
+.apd-tabs{display:flex;gap:6px;margin:0 0 16px}
+.apd-tabs a{flex:1;text-align:center;padding:10px 4px;border-radius:10px;border:1px solid #1c2440;font:700 10px 'DM Mono',monospace;letter-spacing:1px;color:#7d8bab;text-decoration:none;background:#0d1020}
+.apd-tabs a.on{color:#ffffff;background:linear-gradient(110deg,#4f8eff,#7c5bff);border-color:transparent}
+</style>
